@@ -1,0 +1,22 @@
+{
+  "name": "@gorhom/portal-example",
+  "displayName": "React Native Portal Example",
+  "expo": {
+    "name": "@gorhom/portal-example",
+    "slug": "@gorhom/portal-example",
+    "description": "Example app for @gorhom/portal-example",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
