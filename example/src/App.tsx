@@ -1,20 +1,44 @@
-import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import Portal from '@gorhom/portal';
+import React, { useCallback, useRef, useState } from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { Portal, PortalHost } from '@gorhom/portal';
+import CustomComponent from './CustomComponent';
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+const App = () => {
+  const [mount, setMount] = useState(false);
+  const [count, setCount] = useState(0);
+  const customRef = useRef();
 
-  React.useEffect(() => {
-    Portal.multiply(3, 7).then(setResult);
+  const handleIncrementPress = useCallback(() => {
+    setCount(state => state + 1);
   }, []);
-
+  const handleMountPress = useCallback(() => {
+    setMount(state => !state);
+  }, []);
+  const handleRefPress = useCallback(() => {
+    if (customRef.current) {
+      customRef.current.test();
+    }
+  }, []);
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <PortalHost>
+        <Text>Header</Text>
+
+        {mount && (
+          <Portal>
+            <CustomComponent ref={customRef} value={count} />
+          </Portal>
+        )}
+
+        <Text>Footer</Text>
+      </PortalHost>
+
+      <Button onPress={handleIncrementPress} title={'Increment'} />
+      <Button onPress={handleMountPress} title={mount ? 'Unmount' : 'Mount'} />
+      <Button onPress={handleRefPress} title={'Call ref'} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -28,3 +52,5 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 });
+
+export default App;

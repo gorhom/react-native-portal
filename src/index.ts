@@ -1,5 +1,2 @@
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
+export { default as Portal } from './components/portal';
+export { default as PortalHost } from './components/portalHost';
