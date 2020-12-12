@@ -3,23 +3,23 @@ import { nanoid } from 'nanoid/non-secure';
 import { usePortal } from '../../hooks';
 import type { PortalProps } from './types';
 
-const PortalComponent = ({ key: _providedKey, children }: PortalProps) => {
+const PortalComponent = ({ name: _providedName, children }: PortalProps) => {
   //#region hooks
   const { mount, unmount } = usePortal();
   //#endregion
 
   //#region variables
-  const key = useMemo(() => _providedKey || nanoid(), [_providedKey]);
+  const name = useMemo(() => _providedName || nanoid(), [_providedName]);
   //#endregion
 
   //#region effects
   useEffect(() => {
-    mount(key, children);
+    mount(name, children);
     return () => {
-      unmount(key);
+      unmount(name);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, children]);
+  }, [name, children]);
   //#endregion
 
   return null;
