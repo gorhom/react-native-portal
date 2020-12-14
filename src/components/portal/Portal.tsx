@@ -19,7 +19,7 @@ const PortalComponent = ({ name: _providedName, children }: PortalProps) => {
       unmount(name);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name, children]);
+  }, []);
   //#endregion
 
   return null;
