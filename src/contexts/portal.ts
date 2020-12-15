@@ -3,5 +3,6 @@ import type { PortalMethods } from '../types';
 
 export const PortalContext = createContext<PortalMethods>({
   mount: () => {},
+  update: () => {},
   unmount: () => {},
 });

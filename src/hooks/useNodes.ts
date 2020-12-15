@@ -2,11 +2,19 @@ import { ReactNode, useCallback, useReducer } from 'react';
 import { reducer } from '../state';
 
 export const useNodes = () => {
-  const [state, dispatch] = useReducer(reducer, {});
+  const [state, dispatch] = useReducer(reducer, []);
 
   const add = useCallback((key: string, node: ReactNode) => {
     dispatch({
       type: 'ADD_ACTION',
+      key,
+      node,
+    });
+  }, []);
+
+  const update = useCallback((key: string, node: ReactNode) => {
+    dispatch({
+      type: 'UPDATE_ACTION',
       key,
       node,
     });
@@ -19,5 +27,5 @@ export const useNodes = () => {
     });
   }, []);
 
-  return { state, add, remove };
+  return { state, add, update, remove };
 };

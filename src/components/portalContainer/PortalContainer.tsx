@@ -9,17 +9,23 @@ import type { PortalMethods } from '../../types';
 
 const PortalContainerComponent = forwardRef<PortalMethods, any>((_, ref) => {
   //#region state
-  const { state, add, remove } = useNodes();
+  const { state, add, update, remove } = useNodes();
   //#endregion
 
   //#region
-  const mount = useCallback(
+  const handleMount = useCallback(
     (key, node) => {
       add(key, node);
     },
     [add]
   );
-  const unmount = useCallback(
+  const handleUpdate = useCallback(
+    (key, node) => {
+      update(key, node);
+    },
+    [update]
+  );
+  const handleUnmount = useCallback(
     key => {
       remove(key);
     },
@@ -29,13 +35,14 @@ const PortalContainerComponent = forwardRef<PortalMethods, any>((_, ref) => {
 
   //#region forward methods
   useImperativeHandle(ref, () => ({
-    mount,
-    unmount,
+    mount: handleMount,
+    update: handleUpdate,
+    unmount: handleUnmount,
   }));
   //#endregion
 
   //#region render
-  return <>{Object.keys(state).map(key => state[key]) || null}</>;
+  return <>{state.map(item => item.node)}</>;
   //#endregion
 });
 

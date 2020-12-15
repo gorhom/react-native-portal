@@ -1,1 +1,4 @@
-export const selector = (state: Record<string, any>, key: string) => state[key];
+import type { PortalType } from '../types';
+
+export const selector = (state: Array<PortalType>, key: string) =>
+  state.find(item => item.key === key);

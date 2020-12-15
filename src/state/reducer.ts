@@ -1,25 +1,36 @@
-import type { ReactNode } from 'react';
-import { ADD_ACTION, REMOVE_ACTION } from './constants';
+import { ADD_ACTION, REMOVE_ACTION, UPDATE_ACTION } from './constants';
 import { selector } from './selector';
+import type { PortalType } from '../types';
 import type { ActionType } from './types';
 
 export const reducer = (
-  state: Record<string, any>,
+  state: Array<PortalType>,
   action: ActionType
-): Record<string, ReactNode> => {
-  const { type, key } = action;
+): Array<PortalType> => {
+  const { type, key, node = null } = action;
 
   switch (type) {
     case ADD_ACTION:
-      return {
+      return [
         ...state,
-        [key]: action.node,
-      };
+        {
+          key,
+          node,
+        },
+      ];
+
+    case UPDATE_ACTION:
+      return [
+        ...state.filter(item => item.key !== key),
+        {
+          key,
+          node,
+        },
+      ];
 
     case REMOVE_ACTION:
       if (selector(state, key)) {
-        const newState = { ...state };
-        delete newState[key];
+        const newState = state.filter(item => item.key !== key);
         return newState;
       }
       break;

@@ -13,6 +13,11 @@ const PortalHostComponent = ({ children }: PortalHostProps) => {
       containerRef.current.mount(key, node);
     }
   }, []);
+  const update = useCallback((key, node) => {
+    if (containerRef.current) {
+      containerRef.current.update(key, node);
+    }
+  }, []);
   const unmount = useCallback(key => {
     if (containerRef.current) {
       containerRef.current.unmount(key);
@@ -23,9 +28,10 @@ const PortalHostComponent = ({ children }: PortalHostProps) => {
   const value = useMemo(
     () => ({
       mount,
+      update,
       unmount,
     }),
-    [mount, unmount]
+    [mount, update, unmount]
   );
 
   return (
