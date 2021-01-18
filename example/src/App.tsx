@@ -1,56 +1,26 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { Portal, PortalHost } from '@gorhom/portal';
-import CustomComponent from './CustomComponent';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import BasicScreen from './screens/BasicScreen';
+import ModalScreen from './screens/ModalScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
-  const [mount, setMount] = useState(false);
-  const [count, setCount] = useState(0);
-  const customRef = useRef();
-
-  const handleIncrementPress = useCallback(() => {
-    setCount(state => state + 1);
-  }, []);
-  const handleMountPress = useCallback(() => {
-    setMount(state => !state);
-  }, []);
-  const handleRefPress = useCallback(() => {
-    if (customRef.current) {
-      customRef.current.test();
-    }
-  }, []);
   return (
-    <View style={styles.container}>
-      <PortalHost>
-        <Text>Header</Text>
-
-        {mount && (
-          <Portal>
-            <CustomComponent ref={customRef} value={count} />
-          </Portal>
-        )}
-
-        <Text>Footer</Text>
-      </PortalHost>
-
-      <Button onPress={handleIncrementPress} title={'Increment'} />
-      <Button onPress={handleMountPress} title={mount ? 'Unmount' : 'Mount'} />
-      <Button onPress={handleRefPress} title={'Call ref'} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Basic" component={BasicScreen} />
+        <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
 
 export default App;
