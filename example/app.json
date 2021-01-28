@@ -3,10 +3,12 @@
   "displayName": "React Native Portal Example",
   "expo": {
     "name": "@gorhom/portal-example",
-    "slug": "@gorhom/portal-example",
-    "description": "Example app for @gorhom/portal-example",
+    "slug": "portal-example",
+    "owner": "gorhom",
+    "description": "A simplified portal implementation for ⭕️ React Native ⭕️",
     "privacy": "public",
     "version": "1.0.0",
+    "githubUrl": "https://github.com/gorhom/react-native-portal",
     "platforms": [
       "ios",
       "android",

@@ -12,6 +12,8 @@
     "lib"
   ],
   "keywords": [
+    "expo",
+    "react-native-web",
     "react-native",
     "ios",
     "android",
