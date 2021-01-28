@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Portal, PortalHost } from '@gorhom/portal';
+import { Portal } from '@gorhom/portal';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SimplePopover from '../components/SimplePopover';
 
@@ -32,7 +32,7 @@ const BasicScreen = () => {
 
   // callbacks
   const handleMountTopPopoverPress = useCallback(() => {
-    topButtonRef.current?.measure((x, y, width, height) => {
+    topButtonRef.current?.measureInWindow((x, y, width, height) => {
       setConfig({
         position: 'top',
         targetLayout: {
@@ -47,7 +47,7 @@ const BasicScreen = () => {
   }, []);
 
   const handleMountBottomPopoverPress = useCallback(() => {
-    bottomButtonRef.current?.measure((x, y, width, height) => {
+    bottomButtonRef.current?.measureInWindow((x, y, width, height) => {
       setConfig({
         position: 'bottom',
         targetLayout: {
@@ -110,10 +110,8 @@ const styles = StyleSheet.create({
 });
 
 export default () => (
-  <PortalHost>
-    <Tab.Navigator sceneContainerStyle={{ height: WINDOW_HEIGHT }}>
-      <Tab.Screen name="Home" component={BasicScreen} />
-      <Tab.Screen name="Settings" component={BasicScreen} />
-    </Tab.Navigator>
-  </PortalHost>
+  <Tab.Navigator sceneContainerStyle={{ height: WINDOW_HEIGHT }}>
+    <Tab.Screen name="Home" component={BasicScreen} />
+    <Tab.Screen name="Settings" component={BasicScreen} />
+  </Tab.Navigator>
 );
