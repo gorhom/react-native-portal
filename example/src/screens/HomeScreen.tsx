@@ -13,6 +13,10 @@ const data = [
     name: 'Modal',
     slug: 'Modal',
   },
+  {
+    name: 'Popover',
+    slug: 'Popover',
+  },
 ];
 
 const RootScreen = () => {

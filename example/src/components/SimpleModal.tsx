@@ -1,8 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 interface SimpleModalProps {
-  onPress: () => void;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const SimpleModal = ({ onPress }: SimpleModalProps) => {
