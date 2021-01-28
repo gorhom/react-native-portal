@@ -1,8 +1,4 @@
 import { createContext } from 'react';
 import type { PortalMethods } from '../types';
 
-export const PortalContext = createContext<PortalMethods>({
-  mount: () => {},
-  update: () => {},
-  unmount: () => {},
-});
+export const PortalContext = createContext<PortalMethods | null>(null);

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Portal, PortalHost } from '@gorhom/portal';
+import { Portal } from '@gorhom/portal';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SimpleModal from '../components/SimpleModal';
 
@@ -46,10 +46,8 @@ const styles = StyleSheet.create({
 });
 
 export default () => (
-  <PortalHost>
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={BasicScreen} />
-      <Tab.Screen name="Settings" component={BasicScreen} />
-    </Tab.Navigator>
-  </PortalHost>
+  <Tab.Navigator>
+    <Tab.Screen name="Home" component={BasicScreen} />
+    <Tab.Screen name="Settings" component={BasicScreen} />
+  </Tab.Navigator>
 );

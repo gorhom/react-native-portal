@@ -3,7 +3,12 @@ import { nanoid } from 'nanoid/non-secure';
 import { usePortal } from '../../hooks';
 import type { PortalProps } from './types';
 
-const PortalComponent = ({ name: _providedName, children }: PortalProps) => {
+const PortalComponent = ({
+  name: _providedName,
+  handleOnMount,
+  handleOnUnmount,
+  children,
+}: PortalProps) => {
   //#region hooks
   const { mount, unmount, update } = usePortal();
   //#endregion
@@ -14,9 +19,20 @@ const PortalComponent = ({ name: _providedName, children }: PortalProps) => {
 
   //#region effects
   useEffect(() => {
-    mount(name, children);
+    if (handleOnMount) {
+      handleOnMount(() => mount(name, children));
+    } else {
+      mount(name, children);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
     return () => {
-      unmount(name);
+      if (handleOnUnmount) {
+        handleOnUnmount(() => unmount(name));
+      } else {
+        unmount(name);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
