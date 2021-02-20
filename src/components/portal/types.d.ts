@@ -2,11 +2,17 @@ import type { ReactNode } from 'react';
 
 export interface PortalProps {
   /**
-   * Portal key or name, to be used internally.
+   * Portal's name.
    * @type string
    * @default nanoid generated unique key.
    */
   name?: string;
+  /**
+   * Host's name.
+   * @type string
+   * @default 'root'
+   */
+  hostName?: string;
   /**
    * Override internal mounting functionality, this is useful
    * if you want to trigger any action before mounting the portal content.
@@ -22,7 +28,9 @@ export interface PortalProps {
    */
   handleOnUnmount?: (unmount?: () => void) => void;
   /**
-   * Portal content.
+   * Portal's content.
+   * @type ReactNode
+   * @default undefined
    */
   children?: ReactNode | ReactNode[];
 }

@@ -1,4 +1,11 @@
 import { createContext } from 'react';
-import type { PortalMethods } from '../types';
+import type { ActionTypes } from '../state';
+import type { PortalType } from '../types';
 
-export const PortalContext = createContext<PortalMethods | null>(null);
+export const PortalStateContext = createContext<Record<
+  string,
+  Array<PortalType>
+> | null>(null);
+export const PortalDispatchContext = createContext<React.Dispatch<ActionTypes> | null>(
+  null
+);

@@ -1,17 +1,17 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { PortalProvider } from '@gorhom/portal';
 import HomeScreen from './screens/HomeScreen';
 import BasicScreen from './screens/BasicScreen';
 import ModalScreen from './screens/ModalScreen';
 import PopoverScreen from './screens/PopoverScreen';
-import { PortalHost } from '@gorhom/portal';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <PortalHost>
+    <PortalProvider>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -24,7 +24,7 @@ const App = () => {
           <Stack.Screen name="Popover" component={PopoverScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </PortalHost>
+    </PortalProvider>
   );
 };
 

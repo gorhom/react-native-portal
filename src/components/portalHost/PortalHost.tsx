@@ -1,45 +1,26 @@
-import React, { memo, useCallback, useMemo, useRef } from 'react';
-import PortalContainer from '../portalContainer';
-import { PortalContext } from '../../contexts';
-import type { PortalMethods } from '../../types';
+import React, { memo, useEffect } from 'react';
+import { usePortal, usePortalState } from '../../hooks';
 import type { PortalHostProps } from './types';
 
-const PortalHostComponent = ({ children }: PortalHostProps) => {
-  const containerRef = useRef<PortalMethods>(null);
+const PortalHostComponent = ({ name }: PortalHostProps) => {
+  //#region hooks
+  const state = usePortalState(name);
+  const { registerHost, unregisterHost } = usePortal(name);
+  //#endregion
 
-  //#region
-  const mount = useCallback((key, node) => {
-    if (containerRef.current) {
-      containerRef.current.mount(key, node);
-    }
-  }, []);
-  const update = useCallback((key, node) => {
-    if (containerRef.current) {
-      containerRef.current.update(key, node);
-    }
-  }, []);
-  const unmount = useCallback(key => {
-    if (containerRef.current) {
-      containerRef.current.unmount(key);
-    }
+  //#region effects
+  useEffect(() => {
+    registerHost();
+    return () => {
+      unregisterHost();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   //#endregion
 
-  const value = useMemo(
-    () => ({
-      mount,
-      update,
-      unmount,
-    }),
-    [mount, update, unmount]
-  );
-
-  return (
-    <PortalContext.Provider value={value}>
-      {children}
-      <PortalContainer ref={containerRef} />
-    </PortalContext.Provider>
-  );
+  //#region render
+  return <>{state.map(item => item.node)}</>;
+  //#endregion
 };
 
 const PortalHost = memo(PortalHostComponent);

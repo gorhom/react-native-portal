@@ -1,14 +1,74 @@
-import { useContext } from 'react';
-import { PortalContext } from '../contexts';
+import { ReactNode, useCallback, useContext } from 'react';
+import {
+  ADD_PORTAL_ACTION,
+  REGISTER_HOST_ACTION,
+  REMOVE_PORTAL_ACTION,
+  UNREGISTER_HOST_ACTION,
+  UPDATE_PORTAL_ACTION,
+} from '../state/constants';
+import { PortalDispatchContext } from '../contexts';
 
-export const usePortal = () => {
-  const value = useContext(PortalContext);
+export const usePortal = (hostName: string = 'root') => {
+  const dispatch = useContext(PortalDispatchContext);
 
-  if (value === null) {
+  if (dispatch === null) {
     throw new Error(
-      "Portal context cannot be null, please add 'PortalHost' to the root component."
+      "'PortalDispatchContext' cannot be null, please add 'PortalProvider' to the root component."
     );
   }
 
-  return value;
+  //#region methods
+  const registerHost = useCallback(() => {
+    dispatch({
+      type: REGISTER_HOST_ACTION,
+      hostName: hostName,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const unregisterHost = useCallback(() => {
+    dispatch({
+      type: UNREGISTER_HOST_ACTION,
+      hostName: hostName,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const addPortal = useCallback((name: string, node: ReactNode) => {
+    dispatch({
+      type: ADD_PORTAL_ACTION,
+      hostName,
+      portalName: name,
+      node,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updatePortal = useCallback((name: string, node: ReactNode) => {
+    dispatch({
+      type: UPDATE_PORTAL_ACTION,
+      hostName,
+      portalName: name,
+      node,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const removePortal = useCallback((name: string) => {
+    dispatch({
+      type: REMOVE_PORTAL_ACTION,
+      hostName,
+      portalName: name,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  //#endregion
+
+  return {
+    registerHost,
+    unregisterHost,
+    addPortal,
+    updatePortal,
+    removePortal,
+  };
 };
