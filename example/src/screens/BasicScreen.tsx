@@ -8,9 +8,14 @@ const BasicScreen = () => {
       <View style={styles.box}>
         <Text style={styles.text}>
           Text won't be teleported!
-          <Portal hostName="custom_host">
+          <Portal hostName="custom_host_1">
             <Text style={styles.text}>
-              Text to be teleported to the custom host
+              Text to be teleported to the custom host #1
+            </Text>
+          </Portal>
+          <Portal hostName="custom_host_2">
+            <Text style={styles.text}>
+              Text to be teleported to the custom host #2
             </Text>
           </Portal>
           <Portal>
@@ -22,7 +27,8 @@ const BasicScreen = () => {
           </Portal>
         </Text>
       </View>
-      <PortalHost name="custom_host" />
+      <PortalHost name="custom_host_1" />
+      <PortalHost name="custom_host_2" />
     </View>
   );
 };
