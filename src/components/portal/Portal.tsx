@@ -5,12 +5,13 @@ import type { PortalProps } from './types';
 
 const PortalComponent = ({
   name: _providedName,
+  hostName,
   handleOnMount,
   handleOnUnmount,
   children,
 }: PortalProps) => {
   //#region hooks
-  const { mount, unmount, update } = usePortal();
+  const { addPortal, removePortal, updatePortal } = usePortal(hostName);
   //#endregion
 
   //#region variables
@@ -20,24 +21,24 @@ const PortalComponent = ({
   //#region effects
   useEffect(() => {
     if (handleOnMount) {
-      handleOnMount(() => mount(name, children));
+      handleOnMount(() => addPortal(name, children));
     } else {
-      mount(name, children);
+      addPortal(name, children);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     return () => {
       if (handleOnUnmount) {
-        handleOnUnmount(() => unmount(name));
+        handleOnUnmount(() => removePortal(name));
       } else {
-        unmount(name);
+        removePortal(name);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    update(name, children);
+    updatePortal(name, children);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children]);
   //#endregion

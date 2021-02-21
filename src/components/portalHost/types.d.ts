@@ -1,5 +1,7 @@
-import type { ReactNode } from 'react';
-
 export interface PortalHostProps {
-  children: ReactNode | ReactNode[];
+  /**
+   * Host's key or name to be used as an identifer.
+   * @type string
+   */
+  name: string;
 }

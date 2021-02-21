@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 
 export interface PortalMethods {
-  mount: (key: string, node: ReactNode) => void;
-  update: (key: string, node: ReactNode) => void;
-  unmount: (key: string) => void;
+  mount: (name: string, node: ReactNode) => void;
+  update: (name: string, node: ReactNode) => void;
+  unmount: (name: string) => void;
 }
 
 export interface PortalType {
-  key: string;
+  name: string;
   node: ReactNode;
 }

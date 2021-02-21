@@ -8,11 +8,27 @@ const BasicScreen = () => {
       <View style={styles.box}>
         <Text style={styles.text}>
           Text won't be teleported!
+          <Portal hostName="custom_host_1">
+            <Text style={styles.text}>
+              Text to be teleported to the custom host #1
+            </Text>
+          </Portal>
+          <Portal hostName="custom_host_2">
+            <Text style={styles.text}>
+              Text to be teleported to the custom host #2
+            </Text>
+          </Portal>
           <Portal>
-            <Text style={styles.text}>Text to be teleported</Text>
+            <View style={styles.customHostBox}>
+              <Text style={styles.text}>
+                Text to be teleported to the root host
+              </Text>
+            </View>
           </Portal>
         </Text>
       </View>
+      <PortalHost name="custom_host_1" />
+      <PortalHost name="custom_host_2" />
     </View>
   );
 };
@@ -20,6 +36,14 @@ const BasicScreen = () => {
 const styles = StyleSheet.create({
   container: {},
   box: {
+    padding: 24,
+    backgroundColor: '#333',
+  },
+  customHostBox: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     padding: 24,
     backgroundColor: '#333',
   },
@@ -31,8 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
-  <PortalHost>
-    <BasicScreen />
-  </PortalHost>
-);
+export default BasicScreen;
