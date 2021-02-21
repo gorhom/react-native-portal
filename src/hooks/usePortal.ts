@@ -3,7 +3,7 @@ import {
   ADD_PORTAL_ACTION,
   REGISTER_HOST_ACTION,
   REMOVE_PORTAL_ACTION,
-  UNREGISTER_HOST_ACTION,
+  DEREGISTER_HOST_ACTION,
   UPDATE_PORTAL_ACTION,
 } from '../state/constants';
 import { PortalDispatchContext } from '../contexts';
@@ -26,9 +26,9 @@ export const usePortal = (hostName: string = 'root') => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const unregisterHost = useCallback(() => {
+  const deregisterHost = useCallback(() => {
     dispatch({
-      type: UNREGISTER_HOST_ACTION,
+      type: DEREGISTER_HOST_ACTION,
       hostName: hostName,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,7 +66,7 @@ export const usePortal = (hostName: string = 'root') => {
 
   return {
     registerHost,
-    unregisterHost,
+    deregisterHost,
     addPortal,
     updatePortal,
     removePortal,

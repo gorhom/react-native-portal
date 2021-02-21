@@ -1,7 +1,7 @@
 import produce from 'immer';
 import {
   REGISTER_HOST_ACTION,
-  UNREGISTER_HOST_ACTION,
+  DEREGISTER_HOST_ACTION,
   ADD_PORTAL_ACTION,
   REMOVE_PORTAL_ACTION,
   UPDATE_PORTAL_ACTION,
@@ -18,7 +18,7 @@ const registerHost = (
   }
 };
 
-const unregisterHost = (
+const deregisterHost = (
   draft: Record<string, Array<PortalType>>,
   hostName: string
 ) => {
@@ -88,8 +88,8 @@ export const reducer = produce(
         registerHost(draft, action.hostName);
         break;
 
-      case UNREGISTER_HOST_ACTION:
-        unregisterHost(draft, action.hostName);
+      case DEREGISTER_HOST_ACTION:
+        deregisterHost(draft, action.hostName);
         break;
 
       case ADD_PORTAL_ACTION:

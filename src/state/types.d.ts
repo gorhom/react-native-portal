@@ -3,7 +3,7 @@ import type {
   ADD_PORTAL_ACTION,
   REGISTER_HOST_ACTION,
   REMOVE_PORTAL_ACTION,
-  UNREGISTER_HOST_ACTION,
+  DEREGISTER_HOST_ACTION,
   UPDATE_PORTAL_ACTION,
 } from './constants';
 
@@ -33,7 +33,7 @@ export interface RegisterHostAction {
 }
 
 export interface UnregisterHostAction {
-  type: typeof UNREGISTER_HOST_ACTION;
+  type: typeof DEREGISTER_HOST_ACTION;
   hostName: string;
 }
 

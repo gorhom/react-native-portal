@@ -2,13 +2,13 @@ import type { ReactNode } from 'react';
 
 export interface PortalProps {
   /**
-   * Portal's name.
+   * Portal's key or name to be used as an identifer.
    * @type string
    * @default nanoid generated unique key.
    */
   name?: string;
   /**
-   * Host's name.
+   * Host's name to teleport the portal content to.
    * @type string
    * @default 'root'
    */

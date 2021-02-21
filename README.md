@@ -11,6 +11,7 @@ A simplified portal implementation for ⭕️ React Native ⭕️.
 ## Features
 
 - Multi portals handling.
+- Multi portal hosts handling.
 - Allow override functionality.
 - Compatible with `React Native Web`.
 - Compatible with `Expo`, [check out the project Expo Snack](https://snack.expo.io/@gorhom/portal-example).
@@ -27,7 +28,7 @@ yarn add @gorhom/portal
 ```tsx
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Portal, PortalHost } from '@gorhom/portal';
+import { Portal, PortalProvider, PortalHost } from '@gorhom/portal';
 
 const BasicScreen = () => {
   return (
@@ -36,10 +37,20 @@ const BasicScreen = () => {
         <Text style={styles.text}>
           Text won't be teleported!
           <Portal>
-            <Text style={styles.text}>Text to be teleported</Text>
+            <Text style={styles.text}>
+              Text to be teleported to the root host
+            </Text>
+          </Portal>
+          <Portal hostName="custom_host">
+            <Text style={styles.text}>
+              Text to be teleported to the custom host
+            </Text>
           </Portal>
         </Text>
       </View>
+
+      {/* Custom host */}
+      <PortalHost name="custom_host" />
     </View>
   );
 };
@@ -59,22 +70,30 @@ const styles = StyleSheet.create({
 });
 
 export default () => (
-  <PortalHost>
+  <PortalProvider>
     <BasicScreen />
     {/* Text will be teleported to here */}
-  </PortalHost>
+  </PortalProvider>
 );
 ```
 
 ## Props
 
-### `name`
+### Portal Props
 
-Portal key or name to be used internally.
+#### `name`
+
+Portal's key or name to be used as an identifer.
 
 > `required:` NO | `type:` string | `default:` auto generated unique key
 
-### `handleOnMount`
+#### `hostName`
+
+Host's key or name to teleport the portal content to.
+
+> `required:` NO | `type:` string | `default:` 'root'
+
+#### `handleOnMount`
 
 Override internal mounting functionality, this is useful if you want to trigger any action before mounting the portal content.
 
@@ -84,7 +103,7 @@ type handleOnMount = (mount?: () => void) => void;
 
 > `required:` NO | `type:` function | `default:` undefined
 
-### `handleOnUnmount`
+#### `handleOnUnmount`
 
 Override internal un-mounting functionality, this is useful if you want to trigger any action before un-mounting the portal content.
 
@@ -94,19 +113,59 @@ type handleOnUnmount = (unmount?: () => void) => void;
 
 > `required:` NO | `type:` function | `default:` undefined
 
-### `children`
+#### `children`
 
-Portal content.
+Portal's content.
 
 > `required:` NO | `type:` ReactNode | ReactNode[] | `default:` undefined
+
+### PortalHost Props
+
+#### `name`
+
+Host's key or name to be used as an identifer.
+
+> `required:` YES | `type:` string
 
 ## Hooks
 
 ### `usePortal`
 
-To access internal mounting and un-mounting functionality of any portal.
+To access internal functionalities of all portals.
 
-> `type:` [PortalMethods](./src/types.ts#L3)
+```ts
+/**
+ * @param hostName host name or key.
+ */
+type usePortal = (hostName: string = 'root') => {
+  /**
+   * Register a new host.
+   */
+  registerHost: () => void,
+  /**
+   * Deregister a host.
+   */
+  deregisterHost: () => void,
+  /**
+   * Add portal to the host container.
+   * @param name portal name or key
+   * @param node portal content
+   */
+  addPortal: (name: string, node: ReactNode) => void
+  /**
+   * Update portal content.
+   * @param name portal name or key
+   * @param node portal content
+   */
+  updatePortal: (name: string, node: ReactNode) => void
+  /**
+   * Remove portal from host container.
+   * @param name portal name or key
+   */
+  removePortal: (name: string) => void
+}
+
+```
 
 <h2 id="built-with">Built With ❤️</h2>
 
