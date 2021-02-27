@@ -37,10 +37,18 @@ const addPortal = (
     registerHost(draft, hostName);
   }
 
-  draft[hostName].push({
-    name: portalName,
-    node,
-  });
+  /**
+   * updated portal, if it was already added.
+   */
+  const index = draft[hostName].findIndex(item => item.name === portalName);
+  if (index !== -1) {
+    draft[hostName][index].node = node;
+  } else {
+    draft[hostName].push({
+      name: portalName,
+      node,
+    });
+  }
 };
 
 const updatePortal = (
