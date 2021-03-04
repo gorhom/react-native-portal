@@ -47,5 +47,6 @@ const PortalComponent = ({
 };
 
 const Portal = memo(PortalComponent);
+Portal.displayName = 'Portal';
 
 export default Portal;

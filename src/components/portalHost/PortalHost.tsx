@@ -24,5 +24,6 @@ const PortalHostComponent = ({ name }: PortalHostProps) => {
 };
 
 const PortalHost = memo(PortalHostComponent);
+PortalHost.displayName = 'PortalHost';
 
 export default PortalHost;
