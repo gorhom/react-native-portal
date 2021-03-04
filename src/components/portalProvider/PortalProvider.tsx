@@ -17,5 +17,6 @@ const PortalProviderComponent = ({ children }: PortalProviderProps) => {
 };
 
 const PortalProvider = memo(PortalProviderComponent);
+PortalProvider.displayName = 'PortalProvider';
 
 export default PortalProvider;
