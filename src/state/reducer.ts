@@ -1,4 +1,4 @@
-import produce, { enableES5 } from 'immer';
+import produce, { enableES5, setAutoFreeze } from 'immer';
 import {
   REGISTER_HOST_ACTION,
   DEREGISTER_HOST_ACTION,
@@ -10,6 +10,7 @@ import type { PortalType } from '../types';
 import type { ActionTypes, AddPortalAction } from './types';
 
 enableES5();
+setAutoFreeze(false);
 
 const registerHost = (
   draft: Record<string, Array<PortalType>>,
