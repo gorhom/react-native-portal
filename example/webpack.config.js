@@ -6,7 +6,16 @@ const root = path.resolve(__dirname, '..');
 const node_modules = path.join(__dirname, 'node_modules');
 
 module.exports = async function (env, argv) {
-  const config = await createExpoWebpackConfigAsync(env, argv);
+  const config = await createExpoWebpackConfigAsync(
+    {
+      ...env,
+      babel: {
+        ...env.babel,
+        dangerouslyAddModulePathsToTranspile: ['moti', '@motify'],
+      },
+    },
+    argv
+  );
 
   config.module.rules.push({
     test: /\.(js|ts|tsx)$/,

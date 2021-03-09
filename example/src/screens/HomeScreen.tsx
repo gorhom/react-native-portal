@@ -17,6 +17,10 @@ const data = [
     name: 'Popover',
     slug: 'Popover',
   },
+  {
+    name: 'Moti Integration',
+    slug: 'Moti',
+  },
 ];
 
 const RootScreen = () => {
