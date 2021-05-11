@@ -1,29 +1,27 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useMemo } from 'react';
+import { ShowcaseApp } from '@gorhom/showcase-template';
 import { PortalProvider } from '@gorhom/portal';
-import HomeScreen from './screens/HomeScreen';
-import BasicScreen from './screens/BasicScreen';
-import ModalScreen from './screens/ModalScreen';
-import PopoverScreen from './screens/PopoverScreen';
-
-const Stack = createStackNavigator();
+import { screens } from './screens';
+import { version, description } from '../../package.json';
 
 const App = () => {
+  // variables
+  const author = useMemo(
+    () => ({
+      username: 'Mo Gorhom',
+      url: 'https://gorhom.dev',
+    }),
+    []
+  );
   return (
     <PortalProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Basic" component={BasicScreen} />
-          <Stack.Screen name="Modal" component={ModalScreen} />
-          <Stack.Screen name="Popover" component={PopoverScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ShowcaseApp
+        name="Bottom Sheet"
+        description={description}
+        version={version}
+        author={author}
+        data={screens}
+      />
     </PortalProvider>
   );
 };
