@@ -13,28 +13,28 @@
   },
   "dependencies": {
     "@gorhom/showcase-template": "^2.0.4",
-    "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/bottom-tabs": "^5.11.8",
-    "@react-navigation/native": "^5.9.3",
-    "@react-navigation/stack": "^5.14.3",
+    "@react-native-community/masked-view": "0.1.11",
+    "@react-navigation/bottom-tabs": "^5.11.11",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.5",
     "expo": "^41.0.1",
     "expo-splash-screen": "~0.10.2",
-    "immer": "^8.0.1",
+    "immer": "^9.0.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "0.63.4",
-    "react-native-gesture-handler": "~1.10.2",
-    "react-native-reanimated": "~2.1.0",
+    "react-native-gesture-handler": "~1.10.3",
+    "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
-    "react-native-screens": "~3.0.0",
+    "react-native-screens": "~3.3.0",
     "react-native-unimodules": "~0.13.3",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.16.5"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@babel/runtime": "^7.12.18",
+    "@expo/webpack-config": "^0.12.76",
     "babel-plugin-module-resolver": "^4.1.0",
-    "babel-preset-expo": "8.3.0",
-    "expo-cli": "^4.4.4"
+    "babel-preset-expo": "8.3.0"
   }
 }
