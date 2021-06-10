@@ -30,9 +30,11 @@
     "test": "jest",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "build": "bob build && yarn copy-dts",
+    "build": "yarn delete-build && bob build && yarn copy-dts && yarn delete-dts.js",
     "release": "release-it",
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" lib/typescript",
+    "delete-build": "rm -rf lib",
+    "delete-dts.js": "find ./lib/commonjs -name '*.d.js*' -delete && find ./lib/module -name '*.d.js*' -delete",
     "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn && pod install"
   },

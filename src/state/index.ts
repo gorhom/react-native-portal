@@ -1,3 +1,3 @@
 export { reducer } from './reducer';
-export * from './constants';
+export { ACTIONS, INITIAL_STATE } from './constants';
 export type { ActionTypes } from './types';

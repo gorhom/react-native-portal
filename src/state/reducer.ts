@@ -1,11 +1,6 @@
 import produce, { enableES5, setAutoFreeze } from 'immer';
-import {
-  REGISTER_HOST_ACTION,
-  DEREGISTER_HOST_ACTION,
-  ADD_PORTAL_ACTION,
-  REMOVE_PORTAL_ACTION,
-  UPDATE_PORTAL_ACTION,
-} from './constants';
+import { ACTIONS } from './constants';
+import { print } from '../utilities/logger';
 import type { PortalType } from '../types';
 import type { ActionTypes, AddPortalAction } from './types';
 
@@ -59,11 +54,11 @@ const updatePortal = (
   node: any
 ) => {
   if (!(hostName in draft)) {
-    if (__DEV__) {
-      console.error(
-        `Failed to update portal '${portalName}', '${hostName}' was not registered!`
-      );
-    }
+    print({
+      component: reducer.name,
+      method: updatePortal.name,
+      params: `Failed to update portal '${portalName}', '${hostName}' was not registered!`,
+    });
     return;
   }
 
@@ -79,11 +74,11 @@ const removePortal = (
   portalName: string
 ) => {
   if (!(hostName in draft)) {
-    if (__DEV__) {
-      console.error(
-        `Failed to remove portal '${portalName}', '${hostName}' was not registered!`
-      );
-    }
+    print({
+      component: reducer.name,
+      method: removePortal.name,
+      params: `Failed to remove portal '${portalName}', '${hostName}' was not registered!`,
+    });
     return;
   }
 
@@ -95,15 +90,15 @@ export const reducer = produce(
   (draft: Record<string, Array<PortalType>>, action: ActionTypes) => {
     const { type } = action;
     switch (type) {
-      case REGISTER_HOST_ACTION:
+      case ACTIONS.REGISTER_HOST:
         registerHost(draft, action.hostName);
         break;
 
-      case DEREGISTER_HOST_ACTION:
+      case ACTIONS.DEREGISTER_HOST:
         deregisterHost(draft, action.hostName);
         break;
 
-      case ADD_PORTAL_ACTION:
+      case ACTIONS.ADD_PORTAL:
         addPortal(
           draft,
           action.hostName,
@@ -112,7 +107,7 @@ export const reducer = produce(
         );
         break;
 
-      case UPDATE_PORTAL_ACTION:
+      case ACTIONS.UPDATE_PORTAL:
         updatePortal(
           draft,
           action.hostName,
@@ -121,7 +116,7 @@ export const reducer = produce(
         );
         break;
 
-      case REMOVE_PORTAL_ACTION:
+      case ACTIONS.REMOVE_PORTAL:
         removePortal(
           draft,
           action.hostName,

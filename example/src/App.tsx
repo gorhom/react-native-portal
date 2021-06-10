@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import { ShowcaseApp } from '@gorhom/showcase-template';
-import { PortalProvider } from '@gorhom/portal';
+import { PortalProvider, enableLogging } from '@gorhom/portal';
 import { screens } from './screens';
 import { version, description } from '../../package.json';
+
+enableLogging();
 
 const App = () => {
   // variables

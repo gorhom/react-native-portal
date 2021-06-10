@@ -1,11 +1,5 @@
 import { ReactNode, useCallback, useContext } from 'react';
-import {
-  ADD_PORTAL_ACTION,
-  REGISTER_HOST_ACTION,
-  REMOVE_PORTAL_ACTION,
-  DEREGISTER_HOST_ACTION,
-  UPDATE_PORTAL_ACTION,
-} from '../state/constants';
+import { ACTIONS } from '../state/constants';
 import { PortalDispatchContext } from '../contexts';
 
 export const usePortal = (hostName: string = 'root') => {
@@ -20,7 +14,7 @@ export const usePortal = (hostName: string = 'root') => {
   //#region methods
   const registerHost = useCallback(() => {
     dispatch({
-      type: REGISTER_HOST_ACTION,
+      type: ACTIONS.REGISTER_HOST,
       hostName: hostName,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +22,7 @@ export const usePortal = (hostName: string = 'root') => {
 
   const deregisterHost = useCallback(() => {
     dispatch({
-      type: DEREGISTER_HOST_ACTION,
+      type: ACTIONS.DEREGISTER_HOST,
       hostName: hostName,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,7 +30,7 @@ export const usePortal = (hostName: string = 'root') => {
 
   const addPortal = useCallback((name: string, node: ReactNode) => {
     dispatch({
-      type: ADD_PORTAL_ACTION,
+      type: ACTIONS.ADD_PORTAL,
       hostName,
       portalName: name,
       node,
@@ -46,7 +40,7 @@ export const usePortal = (hostName: string = 'root') => {
 
   const updatePortal = useCallback((name: string, node: ReactNode) => {
     dispatch({
-      type: UPDATE_PORTAL_ACTION,
+      type: ACTIONS.UPDATE_PORTAL,
       hostName,
       portalName: name,
       node,
@@ -56,7 +50,7 @@ export const usePortal = (hostName: string = 'root') => {
 
   const removePortal = useCallback((name: string) => {
     dispatch({
-      type: REMOVE_PORTAL_ACTION,
+      type: ACTIONS.REMOVE_PORTAL,
       hostName,
       portalName: name,
     });
