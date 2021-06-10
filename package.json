@@ -1,6 +1,6 @@
 {
   "name": "@gorhom/portal",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simplified portal implementation for ⭕️ React Native ⭕️",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
