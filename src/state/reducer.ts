@@ -129,6 +129,5 @@ export const reducer = produce(
         );
         break;
     }
-    return draft;
   }
 );
