@@ -4,4 +4,11 @@ export interface PortalHostProps {
    * @type string
    */
   name: string;
+  /**
+   * Determines whether the container will be rendered under the
+   * react native root view or native root view.
+   * @type boolean
+   * @default true
+   */
+  contained?: boolean;
 }

@@ -1,6 +1,14 @@
 import type { ReactNode } from 'react';
+import type { ModalProps } from 'react-native';
 
-export interface PortalProps {
+export interface PortalProps
+  extends Pick<
+    ModalProps,
+    | 'animationType'
+    | 'transparent'
+    | 'hardwareAccelerated'
+    | 'statusBarTranslucent'
+  > {
   /**
    * Portal's key or name to be used as an identifer.
    * @type string
@@ -13,6 +21,13 @@ export interface PortalProps {
    * @default 'root'
    */
   hostName?: string;
+  /**
+   * Determines whether the portal will be rendered under the
+   * react native root view or native root view.
+   * @type boolean
+   * @default true
+   */
+  contained?: boolean;
   /**
    * Override internal mounting functionality, this is useful
    * if you want to trigger any action before mounting the portal content.

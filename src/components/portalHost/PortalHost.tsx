@@ -1,8 +1,9 @@
 import React, { memo, useEffect } from 'react';
 import { usePortal, usePortalState } from '../../hooks';
+import PortalContainer from '../portalContainer';
 import type { PortalHostProps } from './types';
 
-const PortalHostComponent = ({ name }: PortalHostProps) => {
+const PortalHostComponent = ({ name, contained = true }: PortalHostProps) => {
   //#region hooks
   const state = usePortalState(name);
   const { registerHost, deregisterHost } = usePortal(name);
@@ -19,7 +20,11 @@ const PortalHostComponent = ({ name }: PortalHostProps) => {
   //#endregion
 
   //#region render
-  return <>{state.map(item => item.node)}</>;
+  return (
+    <PortalContainer contained={contained}>
+      {state.map(item => item.node)}
+    </PortalContainer>
+  );
   //#endregion
 };
 
