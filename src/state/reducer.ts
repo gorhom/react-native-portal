@@ -23,7 +23,7 @@ const deregisterHost = (
   delete draft[hostName];
 };
 
-const addPortal = (
+const addOrUpdatePortal = (
   draft: Record<string, Array<PortalType>>,
   hostName: string,
   portalName: string,
@@ -44,27 +44,6 @@ const addPortal = (
       name: portalName,
       node,
     });
-  }
-};
-
-const updatePortal = (
-  draft: Record<string, Array<PortalType>>,
-  hostName: string,
-  portalName: string,
-  node: any
-) => {
-  if (!(hostName in draft)) {
-    print({
-      component: reducer.name,
-      method: updatePortal.name,
-      params: `Failed to update portal '${portalName}', '${hostName}' was not registered!`,
-    });
-    return;
-  }
-
-  const index = draft[hostName].findIndex(item => item.name === portalName);
-  if (index !== -1) {
-    draft[hostName][index].node = node;
   }
 };
 
@@ -99,16 +78,8 @@ export const reducer = produce(
         break;
 
       case ACTIONS.ADD_PORTAL:
-        addPortal(
-          draft,
-          action.hostName,
-          (action as AddPortalAction).portalName,
-          (action as AddPortalAction).node
-        );
-        break;
-
       case ACTIONS.UPDATE_PORTAL:
-        updatePortal(
+        addOrUpdatePortal(
           draft,
           action.hostName,
           (action as AddPortalAction).portalName,
