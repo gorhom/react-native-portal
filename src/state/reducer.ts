@@ -1,99 +1,103 @@
-import produce, { enableES5, setAutoFreeze } from 'immer';
 import { ACTIONS } from './constants';
 import { print } from '../utilities/logger';
 import type { PortalType } from '../types';
 import type { ActionTypes, AddPortalAction } from './types';
 
-enableES5();
-setAutoFreeze(false);
-
 const registerHost = (
-  draft: Record<string, Array<PortalType>>,
+  state: Record<string, Array<PortalType>>,
   hostName: string
 ) => {
-  if (!(hostName in draft)) {
-    draft[hostName] = [];
+  let updatedState = { ...state };
+  if (!(hostName in updatedState)) {
+    updatedState[hostName] = [];
   }
+  return updatedState;
 };
 
 const deregisterHost = (
-  draft: Record<string, Array<PortalType>>,
+  state: Record<string, Array<PortalType>>,
   hostName: string
 ) => {
-  delete draft[hostName];
+  let updatedState = { ...state };
+  delete updatedState[hostName];
+  return updatedState;
 };
 
 const addOrUpdatePortal = (
-  draft: Record<string, Array<PortalType>>,
+  state: Record<string, Array<PortalType>>,
   hostName: string,
   portalName: string,
   node: any
 ) => {
-  if (!(hostName in draft)) {
-    registerHost(draft, hostName);
+  let updatedState = { ...state };
+  if (!(hostName in updatedState)) {
+    updatedState = registerHost(updatedState, hostName);
   }
 
   /**
    * updated portal, if it was already added.
    */
-  const index = draft[hostName].findIndex(item => item.name === portalName);
+  const index = updatedState[hostName].findIndex(
+    item => item.name === portalName
+  );
   if (index !== -1) {
-    draft[hostName][index].node = node;
+    updatedState[hostName][index].node = node;
   } else {
-    draft[hostName].push({
+    updatedState[hostName].push({
       name: portalName,
       node,
     });
   }
+  return updatedState;
 };
 
 const removePortal = (
-  draft: Record<string, Array<PortalType>>,
+  state: Record<string, Array<PortalType>>,
   hostName: string,
   portalName: string
 ) => {
-  if (!(hostName in draft)) {
+  let updatedState = { ...state };
+  if (!(hostName in updatedState)) {
     print({
       component: reducer.name,
       method: removePortal.name,
       params: `Failed to remove portal '${portalName}', '${hostName}' was not registered!`,
     });
-    return;
+    return updatedState;
   }
 
-  const index = draft[hostName].findIndex(item => item.name === portalName);
-  if (index !== -1) draft[hostName].splice(index, 1);
+  const index = updatedState[hostName].findIndex(
+    item => item.name === portalName
+  );
+  if (index !== -1) updatedState[hostName].splice(index, 1);
+  return updatedState;
 };
 
-export const reducer = produce(
-  (draft: Record<string, Array<PortalType>>, action: ActionTypes) => {
-    const { type } = action;
-    switch (type) {
-      case ACTIONS.REGISTER_HOST:
-        registerHost(draft, action.hostName);
-        break;
-
-      case ACTIONS.DEREGISTER_HOST:
-        deregisterHost(draft, action.hostName);
-        break;
-
-      case ACTIONS.ADD_PORTAL:
-      case ACTIONS.UPDATE_PORTAL:
-        addOrUpdatePortal(
-          draft,
-          action.hostName,
-          (action as AddPortalAction).portalName,
-          (action as AddPortalAction).node
-        );
-        break;
-
-      case ACTIONS.REMOVE_PORTAL:
-        removePortal(
-          draft,
-          action.hostName,
-          (action as AddPortalAction).portalName
-        );
-        break;
-    }
+export const reducer = (
+  state: Record<string, Array<PortalType>>,
+  action: ActionTypes
+) => {
+  const { type } = action;
+  switch (type) {
+    case ACTIONS.REGISTER_HOST:
+      return registerHost(state, action.hostName);
+    case ACTIONS.DEREGISTER_HOST:
+      return deregisterHost(state, action.hostName);
+    case ACTIONS.ADD_PORTAL:
+    case ACTIONS.UPDATE_PORTAL:
+      return addOrUpdatePortal(
+        state,
+        action.hostName,
+        (action as AddPortalAction).portalName,
+        (action as AddPortalAction).node
+      );
+    case ACTIONS.REMOVE_PORTAL:
+      return removePortal(
+        state,
+        action.hostName,
+        (action as AddPortalAction).portalName
+      );
+    default:
+      return state;
   }
-);
+};

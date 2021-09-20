@@ -39,7 +39,6 @@
     "bootstrap": "yarn example && yarn && pod install"
   },
   "dependencies": {
-    "immer": "^9.0.3",
     "nanoid": "^3.1.23"
   },
   "devDependencies": {
