@@ -7,20 +7,18 @@ const registerHost = (
   state: Record<string, Array<PortalType>>,
   hostName: string
 ) => {
-  let updatedState = { ...state };
-  if (!(hostName in updatedState)) {
-    updatedState[hostName] = [];
+  if (!(hostName in state)) {
+    state[hostName] = [];
   }
-  return updatedState;
+  return state;
 };
 
 const deregisterHost = (
   state: Record<string, Array<PortalType>>,
   hostName: string
 ) => {
-  let updatedState = { ...state };
-  delete updatedState[hostName];
-  return updatedState;
+  delete state[hostName];
+  return state;
 };
 
 const addOrUpdatePortal = (
@@ -29,26 +27,25 @@ const addOrUpdatePortal = (
   portalName: string,
   node: any
 ) => {
-  let updatedState = { ...state };
-  if (!(hostName in updatedState)) {
-    updatedState = registerHost(updatedState, hostName);
+  if (!(hostName in state)) {
+    state = registerHost(state, hostName);
   }
 
   /**
    * updated portal, if it was already added.
    */
-  const index = updatedState[hostName].findIndex(
+  const index = state[hostName].findIndex(
     item => item.name === portalName
   );
   if (index !== -1) {
-    updatedState[hostName][index].node = node;
+    state[hostName][index].node = node;
   } else {
-    updatedState[hostName].push({
+    state[hostName].push({
       name: portalName,
       node,
     });
   }
-  return updatedState;
+  return state;
 };
 
 const removePortal = (
@@ -56,21 +53,20 @@ const removePortal = (
   hostName: string,
   portalName: string
 ) => {
-  let updatedState = { ...state };
-  if (!(hostName in updatedState)) {
+  if (!(hostName in state)) {
     print({
       component: reducer.name,
       method: removePortal.name,
       params: `Failed to remove portal '${portalName}', '${hostName}' was not registered!`,
     });
-    return updatedState;
+    return state;
   }
 
-  const index = updatedState[hostName].findIndex(
+  const index = state[hostName].findIndex(
     item => item.name === portalName
   );
-  if (index !== -1) updatedState[hostName].splice(index, 1);
-  return updatedState;
+  if (index !== -1) state[hostName].splice(index, 1);
+  return state;
 };
 
 export const reducer = (
@@ -78,22 +74,23 @@ export const reducer = (
   action: ActionTypes
 ) => {
   const { type } = action;
+  let clonedState = {...state};
   switch (type) {
     case ACTIONS.REGISTER_HOST:
-      return registerHost(state, action.hostName);
+      return registerHost(clonedState, action.hostName);
     case ACTIONS.DEREGISTER_HOST:
-      return deregisterHost(state, action.hostName);
+      return deregisterHost(clonedState, action.hostName);
     case ACTIONS.ADD_PORTAL:
     case ACTIONS.UPDATE_PORTAL:
       return addOrUpdatePortal(
-        state,
+        clonedState,
         action.hostName,
         (action as AddPortalAction).portalName,
         (action as AddPortalAction).node
       );
     case ACTIONS.REMOVE_PORTAL:
       return removePortal(
-        state,
+        clonedState,
         action.hostName,
         (action as AddPortalAction).portalName
       );
