@@ -17,45 +17,49 @@ export const usePortal = (hostName: string = 'root') => {
       type: ACTIONS.REGISTER_HOST,
       hostName: hostName,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, hostName]);
 
   const deregisterHost = useCallback(() => {
     dispatch({
       type: ACTIONS.DEREGISTER_HOST,
-      hostName: hostName,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const addPortal = useCallback((name: string, node: ReactNode) => {
-    dispatch({
-      type: ACTIONS.ADD_PORTAL,
       hostName,
-      portalName: name,
-      node,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, hostName]);
 
-  const updatePortal = useCallback((name: string, node: ReactNode) => {
-    dispatch({
-      type: ACTIONS.UPDATE_PORTAL,
-      hostName,
-      portalName: name,
-      node,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const addPortal = useCallback(
+    (name: string, node: ReactNode) => {
+      dispatch({
+        type: ACTIONS.ADD_PORTAL,
+        hostName,
+        portalName: name,
+        node,
+      });
+    },
+    [dispatch, hostName]
+  );
 
-  const removePortal = useCallback((name: string) => {
-    dispatch({
-      type: ACTIONS.REMOVE_PORTAL,
-      hostName,
-      portalName: name,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const updatePortal = useCallback(
+    (name: string, node: ReactNode) => {
+      dispatch({
+        type: ACTIONS.UPDATE_PORTAL,
+        hostName,
+        portalName: name,
+        node,
+      });
+    },
+    [dispatch, hostName]
+  );
+
+  const removePortal = useCallback(
+    (name: string) => {
+      dispatch({
+        type: ACTIONS.REMOVE_PORTAL,
+        hostName,
+        portalName: name,
+      });
+    },
+    [dispatch, hostName]
+  );
   //#endregion
 
   return {
