@@ -1,14 +1,7 @@
 import type { ReactNode } from 'react';
 import type { ACTIONS } from './constants';
 
-export interface AddPortalAction {
-  type: ACTIONS;
-  hostName: string;
-  portalName: string;
-  node: ReactNode;
-}
-
-export interface UpdatePortalAction {
+export interface AddUpdatePortalAction {
   type: ACTIONS;
   hostName: string;
   portalName: string;
@@ -32,8 +25,7 @@ export interface UnregisterHostAction {
 }
 
 export type ActionTypes =
-  | AddPortalAction
-  | UpdatePortalAction
+  | AddUpdatePortalAction
   | RemovePortalAction
   | RegisterHostAction
   | UnregisterHostAction;

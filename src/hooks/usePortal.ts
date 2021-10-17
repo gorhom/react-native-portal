@@ -28,19 +28,9 @@ export const usePortal = (hostName: string = 'root') => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const addPortal = useCallback((name: string, node: ReactNode) => {
+  const addUpdatePortal = useCallback((name: string, node: ReactNode) => {
     dispatch({
-      type: ACTIONS.ADD_PORTAL,
-      hostName,
-      portalName: name,
-      node,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const updatePortal = useCallback((name: string, node: ReactNode) => {
-    dispatch({
-      type: ACTIONS.UPDATE_PORTAL,
+      type: ACTIONS.ADD_UPDATE_PORTAL,
       hostName,
       portalName: name,
       node,
@@ -61,8 +51,8 @@ export const usePortal = (hostName: string = 'root') => {
   return {
     registerHost,
     deregisterHost,
-    addPortal,
-    updatePortal,
+    addPortal: addUpdatePortal,
+    updatePortal: addUpdatePortal,
     removePortal,
   };
 };

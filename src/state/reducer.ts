@@ -1,7 +1,11 @@
 import { ACTIONS } from './constants';
 import { print } from '../utilities/logger';
 import type { PortalType } from '../types';
-import type { ActionTypes, AddPortalAction } from './types';
+import type {
+  ActionTypes,
+  AddUpdatePortalAction,
+  RemovePortalAction,
+} from './types';
 
 const registerHost = (
   state: Record<string, Array<PortalType>>,
@@ -21,7 +25,7 @@ const deregisterHost = (
   return state;
 };
 
-const addOrUpdatePortal = (
+const addUpdatePortal = (
   state: Record<string, Array<PortalType>>,
   hostName: string,
   portalName: string,
@@ -76,19 +80,18 @@ export const reducer = (
       return registerHost(clonedState, action.hostName);
     case ACTIONS.DEREGISTER_HOST:
       return deregisterHost(clonedState, action.hostName);
-    case ACTIONS.ADD_PORTAL:
-    case ACTIONS.UPDATE_PORTAL:
-      return addOrUpdatePortal(
+    case ACTIONS.ADD_UPDATE_PORTAL:
+      return addUpdatePortal(
         clonedState,
         action.hostName,
-        (action as AddPortalAction).portalName,
-        (action as AddPortalAction).node
+        (action as AddUpdatePortalAction).portalName,
+        (action as AddUpdatePortalAction).node
       );
     case ACTIONS.REMOVE_PORTAL:
       return removePortal(
         clonedState,
         action.hostName,
-        (action as AddPortalAction).portalName
+        (action as RemovePortalAction).portalName
       );
     default:
       return state;
