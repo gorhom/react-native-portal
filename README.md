@@ -4,7 +4,7 @@
 
 A simplified portal implementation for ⭕️ React Native ⭕️.
 
-![React Native Bottom Sheet](./preview.jpg)
+![React Native Portal](./preview.jpg)
 
 ---
 

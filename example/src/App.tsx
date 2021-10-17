@@ -18,7 +18,7 @@ const App = () => {
   return (
     <PortalProvider>
       <ShowcaseApp
-        name="Bottom Sheet"
+        name="Portal"
         description={description}
         version={version}
         author={author}
