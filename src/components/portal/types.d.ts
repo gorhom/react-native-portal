@@ -19,21 +19,21 @@ export interface PortalProps {
    * @type (mount?: () => void) => void
    * @default undefined
    */
-  handleOnMount?: (mount?: () => void) => void;
+  handleOnMount?: (mount: () => void) => void;
   /**
    * Override internal un-mounting functionality, this is useful
    * if you want to trigger any action before un-mounting the portal content.
    * @type (unmount?: () => void) => void
    * @default undefined
    */
-  handleOnUnmount?: (unmount?: () => void) => void;
+  handleOnUnmount?: (unmount: () => void) => void;
   /**
    * Override internal updating functionality, this is useful
    * if you want to trigger any action before updating the portal content.
    * @type (update?: () => void) => void
    * @default undefined
    */
-  handleOnUpdate?: (update?: () => void) => void;
+  handleOnUpdate?: (update: () => void) => void;
   /**
    * Portal's content.
    * @type ReactNode
