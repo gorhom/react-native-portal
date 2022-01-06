@@ -1,5 +1,5 @@
-export { default as Portal } from './components/portal';
-export { default as PortalHost } from './components/portalHost';
-export { default as PortalProvider } from './components/portalProvider';
+export { Portal } from './components/portal/Portal';
+export { PortalHost } from './components/portalHost/PortalHost';
+export { PortalProvider } from './components/portalProvider/PortalProvider';
 export { usePortal } from './hooks/usePortal';
 export { enableLogging } from './utilities/logger';

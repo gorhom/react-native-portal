@@ -1,7 +1,11 @@
 import React, { memo, useReducer } from 'react';
-import PortalHost from '../portalHost';
-import { PortalDispatchContext, PortalStateContext } from '../../contexts';
-import { reducer, INITIAL_STATE } from '../../state';
+import { PortalHost } from '../portalHost/PortalHost';
+import {
+  PortalDispatchContext,
+  PortalStateContext,
+} from '../../contexts/portal';
+import { INITIAL_STATE } from '../../state/constants';
+import { reducer } from '../../state/reducer';
 import type { PortalProviderProps } from './types';
 
 const PortalProviderComponent = ({
@@ -19,7 +23,5 @@ const PortalProviderComponent = ({
   );
 };
 
-const PortalProvider = memo(PortalProviderComponent);
+export const PortalProvider = memo(PortalProviderComponent);
 PortalProvider.displayName = 'PortalProvider';
-
-export default PortalProvider;

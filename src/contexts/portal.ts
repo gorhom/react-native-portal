@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { ActionTypes } from '../state';
+import type { ActionTypes } from '../state/types';
 import type { PortalType } from '../types';
 
 export const PortalStateContext = createContext<Record<

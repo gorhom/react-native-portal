@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PortalStateContext } from '../contexts';
+import { PortalStateContext } from '../contexts/portal';
 
 export const usePortalState = (hostName: string) => {
   const state = useContext(PortalStateContext);

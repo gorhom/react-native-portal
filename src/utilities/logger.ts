@@ -32,7 +32,6 @@ if (__DEV__) {
     } else {
       message = `${params ?? ''}`;
     }
-    // eslint-disable-next-line no-console
     console.log(
       `[Portal::${[component, method].filter(Boolean).join('::')}]`,
       message

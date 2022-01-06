@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
-import { usePortal, usePortalState } from '../../hooks';
+import { usePortalState } from '../../hooks/usePortalState';
+import { usePortal } from '../../hooks/usePortal';
 import type { PortalHostProps } from './types';
 
 const PortalHostComponent = ({ name }: PortalHostProps) => {
@@ -23,7 +24,5 @@ const PortalHostComponent = ({ name }: PortalHostProps) => {
   //#endregion
 };
 
-const PortalHost = memo(PortalHostComponent);
+export const PortalHost = memo(PortalHostComponent);
 PortalHost.displayName = 'PortalHost';
-
-export default PortalHost;

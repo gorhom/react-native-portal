@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { nanoid } from 'nanoid/non-secure';
-import { usePortal } from '../../hooks';
+import { usePortal } from '../../hooks/usePortal';
 import type { PortalProps } from './types';
 
 const PortalComponent = ({
@@ -77,7 +77,5 @@ const PortalComponent = ({
   return null;
 };
 
-const Portal = memo(PortalComponent);
+export const Portal = memo(PortalComponent);
 Portal.displayName = 'Portal';
-
-export default Portal;
