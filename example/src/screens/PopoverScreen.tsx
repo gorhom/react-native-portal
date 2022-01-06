@@ -110,7 +110,10 @@ const styles = StyleSheet.create({
 });
 
 export default () => (
-  <Tab.Navigator sceneContainerStyle={{ height: WINDOW_HEIGHT }}>
+  <Tab.Navigator
+    sceneContainerStyle={{ height: WINDOW_HEIGHT }}
+    screenOptions={{ headerShown: false }}
+  >
     <Tab.Screen name="Home" component={BasicScreen} />
     <Tab.Screen name="Settings" component={BasicScreen} />
   </Tab.Navigator>

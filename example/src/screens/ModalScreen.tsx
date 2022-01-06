@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 });
 
 export default () => (
-  <Tab.Navigator>
+  <Tab.Navigator screenOptions={{ headerShown: false }}>
     <Tab.Screen name="Home" component={BasicScreen} />
     <Tab.Screen name="Settings" component={BasicScreen} />
   </Tab.Navigator>

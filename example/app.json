@@ -1,5 +1,5 @@
 {
-  "name": "@gorhom/portal-example",
+  "name": "React Native Portal",
   "displayName": "React Native Portal Example",
   "expo": {
     "name": "@gorhom/portal-example",
@@ -17,6 +17,7 @@
     "ios": {
       "supportsTablet": true
     },
+    "userInterfaceStyle": "automatic",
     "assetBundlePatterns": [
       "**/*"
     ]

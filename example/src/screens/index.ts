@@ -1,9 +1,11 @@
-export const screens = [
+import { Platform } from 'react-native';
+
+let screens = [
   {
-    title: '',
+    title: 'Basic',
     data: [
       {
-        name: 'Basic',
+        name: 'Default',
         slug: 'basic',
         getScreen: () => require('./BasicScreen').default,
       },
@@ -20,3 +22,18 @@ export const screens = [
     ],
   },
 ];
+
+if (Platform.OS !== 'web') {
+  screens.push({
+    title: 'Advance',
+    data: [
+      {
+        name: 'Native Screens',
+        slug: 'native',
+        getScreen: () => require('./NativeScreen').default,
+      },
+    ],
+  });
+}
+
+export { screens };
