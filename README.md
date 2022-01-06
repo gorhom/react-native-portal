@@ -1,6 +1,6 @@
 # React Native Portal
 
-[![Base UI](https://img.shields.io/npm/v/@gorhom/portal?style=flat-square)](https://www.npmjs.com/package/@gorhom/portal) [![npm](https://img.shields.io/npm/l/@gorhom/portal?style=flat-square)](https://www.npmjs.com/package/@gorhom/portal) [![npm](https://img.shields.io/badge/types-included-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/portal) [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://snack.expo.io/@gorhom/portal-example)
+[![React Native Portal](https://img.shields.io/npm/v/@gorhom/portal?style=flat-square)](https://www.npmjs.com/package/@gorhom/portal) [![npm](https://img.shields.io/npm/l/@gorhom/portal?style=flat-square)](https://www.npmjs.com/package/@gorhom/portal) [![npm](https://img.shields.io/badge/types-included-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/portal) [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://snack.expo.io/@gorhom/portal-example)
 
 A simplified portal implementation for ⭕️ React Native ⭕️.
 
@@ -25,56 +25,98 @@ yarn add @gorhom/portal
 
 ## Usage
 
+### Simple Portal
+
+This is the very simple usage of this library, where you will teleport your content to the `PortalProvider` layer of the app.
+
+First, you will need to add `PortalProvider` to your root component - this usually be the `App.tsx`.
+
 ```tsx
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Portal, PortalProvider, PortalHost } from '@gorhom/portal';
+export const App = () => (
+  <PortalProvider>
+  {... your app goes here}
+  </PortalProvider>
+);
+```
+
+Last, you wrap the content that you want to teleport with `Portal`.
+
+```tsx
+const BasicScreen = () => {
+  return (
+    { ... }
+    <Portal>
+      <Text>
+        Text to be teleported to the root host
+      </Text>
+    </Portal>
+    { ... }
+  );
+};
+```
+
+### Custom Portal Host
+
+This is when you need to teleport your content to a custom portal host `PortalHost` at any layer in the app.
+
+First, you will need to add `PortalProvider` to your root component - this usually be the `App.tsx`.
+
+```tsx
+export const App = () => (
+  <PortalProvider>
+  {... your app goes here ...}
+  </PortalProvider>
+);
+```
+
+Second, you will need to add `PortalHost` at any layer in your app, with a custom name.
+
+```tsx
+const CustomView = () => {
+  return (
+    { ... }
+    <PortalHost name="CustomPortalHost" />
+    { ... }
+  );
+};
+```
+
+Last, you wrap the content that you want to teleport with `Portal` and the custom portal host name.
+
+```tsx
+const BasicScreen = () => {
+  return (
+    { ... }
+    <Portal hostName="CustomPortalHost">
+      <Text>
+        Text to be teleported to the CustomView component
+      </Text>
+    </Portal>
+    { ... }
+  );
+};
+```
+
+### React Native Screens integration
+
+In order to get your teleported content on top of all native views, you will need to wrap your content with `FullWindowOverlay` from `react-native-screens`.
+
+```tsx
+import { FullWindowOverlay } from 'react-native-screens';
 
 const BasicScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>
-          Text won't be teleported!
-          <Portal>
-            <Text style={styles.text}>
-              Text to be teleported to the root host
-            </Text>
-          </Portal>
-          <Portal hostName="custom_host">
-            <Text style={styles.text}>
-              Text to be teleported to the custom host
-            </Text>
-          </Portal>
+    { ... }
+    <Portal>
+      <FullWindowOverlay style={StyleSheet.absoluteFill}>
+        <Text>
+          Text to be teleported to the CustomView component
         </Text>
-      </View>
-
-      {/* Custom host */}
-      <PortalHost name="custom_host" />
-    </View>
+      </FullWindowOverlay>
+    </Portal>
+    { ... }
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  box: {
-    padding: 24,
-    backgroundColor: '#333',
-  },
-  text: {
-    alignSelf: 'center',
-    textAlign: 'center',
-    margin: 24,
-    backgroundColor: '#eee',
-  },
-});
-
-export default () => (
-  <PortalProvider>
-    <BasicScreen />
-    {/* Text will be teleported to here */}
-  </PortalProvider>
-);
 ```
 
 ## Props
@@ -123,7 +165,7 @@ Portal's content.
 
 #### `name`
 
-Host's key or name to be used as an identifer.
+Host's key or name to be used as an identifier.
 
 > `required:` YES | `type:` string
 
@@ -141,30 +183,29 @@ type usePortal = (hostName: string = 'root') => {
   /**
    * Register a new host.
    */
-  registerHost: () => void,
+  registerHost: () => void;
   /**
    * Deregister a host.
    */
-  deregisterHost: () => void,
+  deregisterHost: () => void;
   /**
    * Add portal to the host container.
    * @param name portal name or key
    * @param node portal content
    */
-  addPortal: (name: string, node: ReactNode) => void
+  addPortal: (name: string, node: ReactNode) => void;
   /**
    * Update portal content.
    * @param name portal name or key
    * @param node portal content
    */
-  updatePortal: (name: string, node: ReactNode) => void
+  updatePortal: (name: string, node: ReactNode) => void;
   /**
    * Remove portal from host container.
    * @param name portal name or key
    */
-  removePortal: (name: string) => void
-}
-
+  removePortal: (name: string) => void;
+};
 ```
 
 <h2 id="built-with">Built With ❤️</h2>
@@ -175,20 +216,16 @@ type usePortal = (hostName: string = 'root') => {
 
 - [Mo Gorhom](https://gorhom.dev/)
 
+## Sponsor & Support
+
+To keep this library maintained and up-to-date please consider [sponsoring it on GitHub](https://github.com/sponsors/gorhom). Or if you are looking for a private support or help in customizing the experience, then reach out to me on Twitter [@gorhom](https://twitter.com/gorhom).
+
 ## License
 
 [MIT](./LICENSE)
 
-<div align="center">
-
-Liked the library? 😇
-
-<a href="https://www.buymeacoffee.com/gorhom" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-red.png" alt="Buy Me A Coffee" height="34" ></a>
-
-</div>
-
 ---
 
 <p align="center">
-<a href="https://gorhom.dev" target="_blank"><img height="48" alt="Mo Gorhom" src="./gorhom.png"></a>
+<a href="https://gorhom.dev" target="_blank"><img height="18" alt="Mo Gorhom" src="./mogorhom.png"></a>
 </p>
