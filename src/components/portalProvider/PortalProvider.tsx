@@ -9,6 +9,7 @@ import { reducer } from '../../state/reducer';
 import type { PortalProviderProps } from './types';
 
 const PortalProviderComponent = ({
+  rootHostName = 'root',
   shouldAddRootHost = true,
   children,
 }: PortalProviderProps) => {
@@ -17,7 +18,7 @@ const PortalProviderComponent = ({
     <PortalDispatchContext.Provider value={dispatch}>
       <PortalStateContext.Provider value={state}>
         {children}
-        {shouldAddRootHost && <PortalHost name="root" />}
+        {shouldAddRootHost && <PortalHost name={rootHostName} />}
       </PortalStateContext.Provider>
     </PortalDispatchContext.Provider>
   );

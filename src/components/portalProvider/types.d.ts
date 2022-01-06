@@ -8,5 +8,14 @@ export interface PortalProviderProps {
    * @type boolean
    */
   shouldAddRootHost?: boolean;
+
+  /**
+   * Defines the root portal host name.
+   *
+   * @default "root"
+   * @type string
+   */
+  rootHostName?: string;
+
   children: ReactNode | ReactNode[];
 }
