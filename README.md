@@ -118,6 +118,21 @@ const BasicScreen = () => {
   );
 };
 ```
+### React Native Gesture Handler
+
+To avoid issues when using the React Native Portal with React Native Gesture Handler, you must place the `PortalProvider` under the `GestureHandlerRootView`, otherwise it might freeze your app.
+
+```tsx
+export const App = () => (
+  <GestureHandlerRootView>
+    <PortalProvider>
+    {... your app goes here}
+    </PortalProvider>
+  </GestureHandlerRootView>
+);
+```
+
+> Read more about the [app freezing issue](https://github.com/gorhom/react-native-portal/issues/24).
 
 ## Props
 
@@ -227,5 +242,10 @@ To keep this library maintained and up-to-date please consider [sponsoring it on
 ---
 
 <p align="center">
-<a href="https://gorhom.dev" target="_blank"><img height="18" alt="Mo Gorhom" src="./mogorhom.png"></a>
+  <a href="https://gorhom.dev/#gh-light-mode-only" target="_blank">
+    <img height="18" alt="Mo Gorhom" src="./mogorhom-light.png">
+  </a>
+  <a href="https://gorhom.dev/#gh-dark-mode-only" target="_blank">
+    <img height="18" alt="Mo Gorhom" src="./mogorhom-dark.png">
+  </a>
 </p>
