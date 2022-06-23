@@ -9,7 +9,7 @@ type Print = (options: PrintOptions) => void;
 let isLoggingEnabled = false;
 
 // __DEV__ global is by default not defined in React Native Web builds
-const isDev = Boolean(typeof __DEV__ !== 'undefined' && __DEV__)
+const isDev = Boolean(typeof __DEV__ !== 'undefined' && __DEV__);
 
 const enableLogging = () => {
   if (!isDev) {
