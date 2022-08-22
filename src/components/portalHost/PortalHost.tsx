@@ -20,7 +20,15 @@ const PortalHostComponent = ({ name }: PortalHostProps) => {
   //#endregion
 
   //#region render
-  return <>{state.map(item => item.node)}</>;
+  return (
+    <>
+      {state.map((item, index) => (
+        <React.Fragment key={`${item.name}-${index}`}>
+          {item.node}
+        </React.Fragment>
+      ))}
+    </>
+  );
   //#endregion
 };
 
