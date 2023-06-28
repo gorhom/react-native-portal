@@ -102,16 +102,16 @@ const BasicScreen = () => {
 In order to get your teleported content on top of all native views, you will need to wrap your content with `FullWindowOverlay` from `react-native-screens`.
 
 ```tsx
+import { Portal } from '@gorhom/portal';
+import { StyleSheet } from 'react-native';
 import { FullWindowOverlay } from 'react-native-screens';
 
-const BasicScreen = () => {
+const BasicScreen = (props) => {
   return (
     { ... }
     <Portal>
       <FullWindowOverlay style={StyleSheet.absoluteFill}>
-        <Text>
-          Text to be teleported to the CustomView component
-        </Text>
+        {props.children}
       </FullWindowOverlay>
     </Portal>
     { ... }
