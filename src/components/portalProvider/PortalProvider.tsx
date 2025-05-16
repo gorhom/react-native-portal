@@ -1,4 +1,4 @@
-import React, { memo, useReducer } from 'react';
+import { memo, useReducer } from 'react';
 import { PortalHost } from '../portalHost/PortalHost';
 import {
   PortalDispatchContext,

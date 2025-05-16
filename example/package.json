@@ -1,45 +1,33 @@
 {
   "name": "@gorhom/portal-example",
-  "description": "Example app for @gorhom/portal",
-  "version": "0.0.1",
-  "private": true,
-  "main": "index",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
+    "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "start": "expo start",
-    "test": "jest"
+    "web": "expo start --web"
   },
   "dependencies": {
-    "@gorhom/showcase-template": "^2.1.0",
-    "@react-native-community/masked-view": "0.1.11",
-    "@react-native-masked-view/masked-view": "0.2.6",
-    "@react-navigation/bottom-tabs": "^6.0.9",
-    "@react-navigation/native": "^6.0.6",
-    "@react-navigation/native-stack": "^6.2.5",
-    "@react-navigation/stack": "^6.0.11",
-    "expo": "^44.0.0",
-    "expo-splash-screen": "~0.14.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-native": "0.64.3",
-    "react-native-gesture-handler": "~2.1.0",
-    "react-native-reanimated": "~2.3.1",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-screens": "~3.10.1",
-    "react-native-unimodules": "~0.15.0",
-    "react-native-web": "0.17.1"
+    "@expo/metro-runtime": "~5.0.4",
+    "@gorhom/showcase-template": "^3.0.2",
+    "@react-navigation/bottom-tabs": "^7.3.13",
+    "@react-navigation/native": "^7.1.9",
+    "@react-navigation/native-stack": "^7.3.13",
+    "expo": "~53.0.9",
+    "expo-status-bar": "~2.2.3",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native": "0.79.2",
+    "react-native-reanimated": "^3.17.5",
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-screens": "^4.10.0",
+    "react-native-web": "~0.20.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.18",
-    "@expo/webpack-config": "~0.16.2",
-    "@types/react": "~17.0.21",
-    "@types/react-native": "~0.64.12",
-    "babel-loader": "^8.2.3",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "babel-preset-expo": "9.0.1",
-    "typescript": "~4.3.5"
-  }
+    "@babel/core": "^7.20.0",
+    "react-native-builder-bob": "^0.40.11",
+    "react-native-monorepo-config": "^0.1.9"
+  },
+  "private": true
 }

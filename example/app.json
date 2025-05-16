@@ -1,25 +1,31 @@
 {
-  "name": "React Native Portal",
-  "displayName": "React Native Portal Example",
   "expo": {
-    "name": "@gorhom/portal-example",
-    "slug": "portal-example",
-    "owner": "gorhom",
-    "description": "A simplified portal implementation for ⭕️ React Native ⭕️",
-    "privacy": "public",
+    "name": "example",
+    "slug": "example",
     "version": "1.0.0",
-    "githubUrl": "https://github.com/gorhom/react-native-portal",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "ios": {
-      "supportsTablet": true
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
-    "userInterfaceStyle": "automatic",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "gorhom.portal.example"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "gorhom.portal.example"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }

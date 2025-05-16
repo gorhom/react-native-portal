@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -27,8 +27,8 @@ const BasicScreen = () => {
   });
 
   // refs
-  const topButtonRef = useRef<TouchableOpacity>(null);
-  const bottomButtonRef = useRef<TouchableOpacity>(null);
+  const topButtonRef = useRef<View>(null);
+  const bottomButtonRef = useRef<View>(null);
 
   // callbacks
   const handleMountTopPopoverPress = useCallback(() => {
@@ -42,7 +42,7 @@ const BasicScreen = () => {
           height,
         },
       });
-      setShowModal(state => !state);
+      setShowModal((state) => !state);
     });
   }, []);
 
@@ -57,7 +57,7 @@ const BasicScreen = () => {
           height,
         },
       });
-      setShowModal(state => !state);
+      setShowModal((state) => !state);
     });
   }, []);
 

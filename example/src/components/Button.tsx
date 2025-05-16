@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import type { ReactNode } from 'react';
+import { type ViewStyle, type TextStyle, StyleSheet } from 'react-native';
 import { ShowcaseButton, ShowcaseLabel } from '@gorhom/showcase-template';
 
 interface ButtonProps {

@@ -20,9 +20,9 @@ const PortalComponent = ({
   //#endregion
 
   //#region refs
-  const handleOnMountRef = useRef<Function>();
-  const handleOnUnmountRef = useRef<Function>();
-  const handleOnUpdateRef = useRef<Function>();
+  const handleOnMountRef = useRef<Function>(undefined);
+  const handleOnUnmountRef = useRef<Function>(undefined);
+  const handleOnUpdateRef = useRef<Function>(undefined);
   //#endregion
 
   //#region callbacks

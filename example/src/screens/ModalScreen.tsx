@@ -10,7 +10,7 @@ const BasicScreen = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOnModalPress = useCallback(() => {
-    setShowModal(state => !state);
+    setShowModal((state) => !state);
   }, []);
 
   return (

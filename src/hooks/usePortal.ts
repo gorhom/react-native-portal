@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useContext } from 'react';
+import { type ReactNode, useCallback, useContext } from 'react';
 import { ACTIONS } from '../state/constants';
 import { PortalDispatchContext } from '../contexts/portal';
 

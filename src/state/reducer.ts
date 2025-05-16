@@ -38,9 +38,14 @@ const addUpdatePortal = (
   /**
    * updated portal, if it was already added.
    */
-  const index = state[hostName].findIndex(item => item.name === portalName);
+  if (!state[hostName]) {
+    return state;
+  }
+  const index = state[hostName].findIndex((item) => item.name === portalName);
   if (index !== -1) {
-    state[hostName][index].node = node;
+    if (state[hostName][index]) {
+      state[hostName][index].node = node;
+    }
   } else {
     state[hostName].push({
       name: portalName,
@@ -64,7 +69,15 @@ const removePortal = (
     return state;
   }
 
-  const index = state[hostName].findIndex(item => item.name === portalName);
+  if (!state[hostName]) {
+    print({
+      component: reducer.name,
+      method: removePortal.name,
+      params: `Failed to remove portal '${portalName}', '${hostName}' was not registered!`,
+    });
+    return state;
+  }
+  const index = state[hostName].findIndex((item) => item.name === portalName);
   if (index !== -1) state[hostName].splice(index, 1);
   return state;
 };

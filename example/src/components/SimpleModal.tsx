@@ -1,6 +1,5 @@
-import React from 'react';
 import {
-  GestureResponderEvent,
+  type GestureResponderEvent,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,

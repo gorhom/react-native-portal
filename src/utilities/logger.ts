@@ -30,7 +30,7 @@ if (isDev) {
 
     if (typeof params === 'object') {
       message = Object.keys(params)
-        .map(key => `${key}:${params[key]}`)
+        .map((key) => `${key}:${params[key]}`)
         .join(' ');
     } else {
       message = `${params ?? ''}`;

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ShowcaseApp } from '@gorhom/showcase-template';
 import { PortalProvider, enableLogging } from '@gorhom/portal';
 import { screens } from './screens';

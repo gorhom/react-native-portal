@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
-  GestureResponderEvent,
-  LayoutChangeEvent,
-  LayoutRectangle,
+  type GestureResponderEvent,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -51,7 +51,7 @@ const SimplePopover = ({
         layout: { height, width },
       },
     }: LayoutChangeEvent) => {
-      setLayout(state => {
+      setLayout((state) => {
         if (state.height === height && state.width === width) {
           return state;
         }

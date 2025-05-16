@@ -16,7 +16,7 @@ const DummyScreen = () => {
   const { navigate } = useNavigation();
 
   const handleModalTogglePress = useCallback(() => {
-    setShowModal(state => !state);
+    setShowModal((state) => !state);
   }, []);
 
   const handleNavigatePress = useCallback(() => {

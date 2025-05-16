@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { usePortalState } from '../../hooks/usePortalState';
 import { usePortal } from '../../hooks/usePortal';
 import type { PortalHostProps } from './types';
@@ -20,7 +20,7 @@ const PortalHostComponent = ({ name }: PortalHostProps) => {
   //#endregion
 
   //#region render
-  return <>{state.map(item => item.node)}</>;
+  return <>{state.map((item) => item.node)}</>;
   //#endregion
 };
 
